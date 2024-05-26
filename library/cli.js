@@ -4,7 +4,7 @@ const SVG = require('./svg');
 const { Circle, Triangle, Square } = require("./shapes");
 const { writeFile } = require('fs/promises');
 
-// create user prompt array class
+//User prompt array class
 class CLI {
     run() {
         return inquirer
@@ -34,7 +34,7 @@ class CLI {
             ])
             .then(({ logoText, textColor, logoShape, logoColor }) => {
                 let shape;
-                switch (shapeType) {
+                switch (logoShape) {
                     case 'circle':
                         shape = new Circle();
                         break;
@@ -52,7 +52,7 @@ class CLI {
 
                 const svg = new SVG();
                 svg.setText(logoText, textColor);
-                svg.setShape(logoShape);
+                svg.setShape(shape);
                 return writeFile('logo.svg', svg.render());
             })
             .then(() => {
